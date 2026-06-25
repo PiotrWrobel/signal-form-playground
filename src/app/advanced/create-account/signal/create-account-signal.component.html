@@ -1,0 +1,47 @@
+<mat-card class="create-account-card">
+  <h2>Create account (Reactive Form)</h2>
+
+  <form [formRoot]="form" class="create-account-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" [formField]="form.username" />
+
+      @for (error of form.username().errors(); track error.kind) {
+        <mat-error>{{error.message}}</mat-error>
+      }
+    </mat-form-field>
+
+<!--    <app-custom-input placeholder="Username" [formField]="form.username"></app-custom-input>-->
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [formField]="form.password" />
+      @for (error of form.password().errors(); track error.kind) {
+        <mat-error>{{error.message}}</mat-error>
+      }
+    </mat-form-field>
+
+    @if (passwordHint()) {
+      <p>{{passwordHint()}}</p>
+    }
+
+    <mat-form-field appearance="outline">
+      <mat-label>Repeat password</mat-label>
+      <input matInput type="password" [formField]="form.repeatPassword" />
+      @for (error of form.repeatPassword().errors(); track error.kind) {
+        <mat-error>{{error.message}}</mat-error>
+      }
+    </mat-form-field>
+
+    @if (form.password().touched() && form.repeatPassword().touched()) {
+      @for (error of form().errors(); track error.kind) {
+        <mat-error>{{error.message}}</mat-error>
+      }
+    }
+
+    <button mat-flat-button color="primary" type="submit">Create account</button>
+
+    <button mat-flat-button color="primary" type="button"  (click)="modifyUsername()">Mock user name</button>
+    <button mat-flat-button color="primary" type="button"  (click)="form().reset()">Reset Form</button>
+  </form>
+</mat-card>

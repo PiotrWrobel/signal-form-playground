@@ -1,0 +1,9 @@
+<div class="basic-input">
+  <input
+    #input
+    type="text"
+    [value]="value()"
+    (input)="updateValue(input.value)"
+    placeholder="Custom input"
+  />
+</div>
